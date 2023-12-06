@@ -23,7 +23,7 @@ class S3Client:
         self._base_address = base_address
         self._session = ClientSession()
 
-    async def enumerate_pictures(
+    async def enumerate_files(
         self, from_prefix: int = 0, to_prefix: int = 99
     ) -> AsyncIterable[RemoteFile]:
         CONTENTS_PATTERN = re.compile(r'<Contents>(.*?)</Contents>', re.S)

@@ -56,13 +56,13 @@ async def main(args: DumpArgs) -> None:
         from_prefix = args.from_prefix or 0
         to_prefix = args.to_prefix or 99
 
-        async for pics in async_chunks(
-            aiter(client.enumerate_pictures(from_prefix, to_prefix)), batch_count
+        async for files in async_chunks(
+            aiter(client.enumerate_files(from_prefix, to_prefix)), batch_count
         ):
-            tasks = (safe_download_file(client, pic, output_dir) for pic in pics)
+            tasks = (safe_download_file(client, file, output_dir) for file in files)
             await gather(*tasks)
 
-            dumped_count += len(pics)
+            dumped_count += len(files)
             print(f'[*] Dumped {dumped_count} files. . .')
 
 
